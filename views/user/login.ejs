@@ -24,9 +24,20 @@
                 <input id="password" class="form-control" name="password" type="password" placeholder="PASSWORD" style="margin-bottom:20px;">
             </div>
 
+            <% if (hasError) { %>
+            <% for (var i = 0 ; i < messages.length; i++) { %>
+            <div class="alert alert-danger text-center">
+                <a href="#" data-dismiss="close" aria-label="close" class="close">
+                    &times;
+                </a>
+                <%= messages[i] %>
+            </div>
+            <% } %>
+            <% } %>
+
 
             <div class="form-group">
-                <input type="submit" id="submit" value="LOGIN" class="form-control btn btn-primary" name="login" style="">
+                <input type="submit" id="submit" value="LOGIN" class="form-control btn btn-primary" style="">
             </div>
 
         </form>

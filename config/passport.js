@@ -36,4 +36,24 @@ passport.use('local.signup', new LocalStraegy({
             return done(null, newUser);
         })
     })
-}))
+}));
+
+passport.use('local.login', new LocalStraegy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+}, (req, email, password, done) => {
+    User.findOne({'email': email}, (err, user) => {
+        if (err) {
+            return done(err);
+        }
+
+        var messages = [];
+        if (!user || !user.validPassword(password)) {
+            messages.push('Email does not exist or password is invalid!');
+            return done(null, false, req.flash('error', messages));
+        }
+
+        return done(null, user);
+    })
+}));
