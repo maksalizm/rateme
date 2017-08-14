@@ -28,6 +28,10 @@ module.exports = (app, passport) => {
     app.get('/home', (req, res) => {
         res.render('home', {title: 'Home || Rate me'});
     })
+
+    app.get('/forgot', (req, res) => {
+        res.render('user/forgot', {title: 'Request Password Reset'});
+    })
 };
 
 function validateSignup(req, res, next) {
