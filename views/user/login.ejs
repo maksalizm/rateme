@@ -1,0 +1,40 @@
+<% layout('layout') %>
+
+<div class="container">
+    <br>
+    <br>
+    <div class="text-center reg_msg">
+        <h1><a href="/">RateMe</a></h1>
+    </div>
+    <br>
+    <br>
+    <div class="text-center reg_msg">
+        <h2 class="fancy"><span>LOGIN</span></h2>
+    </div><br>
+
+    <div class="row signup">
+
+        <form method="POST" action="/login">
+
+            <div class="form-group input_group">
+                <input id="email" class="form-control" name="email" type="text" autocomplete="on" placeholder="EMAIL" style="margin-bottom:20px;">
+            </div>
+
+            <div class="form-group input_group">
+                <input id="password" class="form-control" name="password" type="password" placeholder="PASSWORD" style="margin-bottom:20px;">
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" id="submit" value="LOGIN" class="form-control btn btn-primary" name="login" style="">
+            </div>
+
+        </form>
+
+        <div class="text-center">
+            <h4>Don't you have an account? <a href="/signup">Sign Up</a></h4>
+        </div>
+
+
+    </div>
+</div>
