@@ -24,13 +24,13 @@ passport.use('local.signup', new LocalStraegy({
         }
 
         if (user) {
-            return done(null, false)
+            return done(null, false, req.flash('error', 'User With Email Already Exist.'));
         }
 
         var newUser = new User();
         newUser.fullname = req.body.fullname;
         newUser.email = req.body.email;
-        newUser.password = encryptPassword(req.body.password);
+        newUser.password = newUser.encryptPassword(req.body.password);
 
         newUser.save((err) => {
             return done(null, newUser);

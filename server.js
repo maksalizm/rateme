@@ -1,6 +1,7 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var validator = require('express-validator');
 var ejs = require('ejs');
 var engine = require('ejs-mate');
 var session = require('express-session');
@@ -22,6 +23,8 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use(validator());
+
 app.use(session({
     secret: 'maksalizm',
     resave: false,
@@ -37,7 +40,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/user')(app);
+require('./routes/user')(app, passport);
 
 app.listen(3000, function() {
     console.log('App running on port 3000');
