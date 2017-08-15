@@ -16,15 +16,36 @@
     </p>
     <div class="row signup">
 
+        <% if (hasInfo) { %>
+        <% for (var i = 0 ; i < info.length; i++) { %>
+        <div class="alert alert-info text-center">
+            <a href="#" data-dismiss="close" aria-label="close" class="close">
+                &times;
+            </a>
+            <%= info[i] %>
+        </div>
+        <% } %>
+        <% } %>
         <form method="POST" action="/forgot">
 
             <div class="form-group input_group">
                 <input id="email" class="form-control" name="email" type="text" autocomplete="on"
                        placeholder="EMAIL" style="margin-bottom:20px;">
             </div>
+
+
+            <% if (hasError) { %>
+            <% for (var i = 0 ; i < messages.length; i++) { %>
+            <div class="alert alert-danger text-center">
+                <a href="#" data-dismiss="close" aria-label="close" class="close">
+                    &times;
+                </a>
+                <%= messages[i] %>
+            </div>
+            <% } %>
+            <% } %>
             <div class="form-group">
-                <input type="submit" id="submit" value="SEND" class="form-control btn btn-primary"
-                >
+                <input type="submit" id="submit" value="SEND" class="form-control btn btn-primary">
             </div>
         </form>
 
