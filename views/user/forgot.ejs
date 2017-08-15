@@ -19,9 +19,9 @@
         <% if (hasInfo) { %>
         <% for (var i = 0 ; i < info.length; i++) { %>
         <div class="alert alert-info text-center">
-            <a href="#" data-dismiss="close" aria-label="close" class="close">
-                &times;
-            </a>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <%= info[i] %>
         </div>
         <% } %>
@@ -37,9 +37,7 @@
             <% if (hasError) { %>
             <% for (var i = 0 ; i < messages.length; i++) { %>
             <div class="alert alert-danger text-center">
-                <a href="#" data-dismiss="close" aria-label="close" class="close">
-                    &times;
-                </a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <%= messages[i] %>
             </div>
             <% } %>

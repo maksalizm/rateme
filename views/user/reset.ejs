@@ -1,0 +1,58 @@
+<% layout('layout') %>
+
+<div class="container">
+    <br>
+    <br>
+    <div class="text-center reg_msg">
+        <h1><a href="/">RateMe</a></h1>
+    </div>
+    <br>
+    <br>
+    <div class="text-center reg_msg">
+        <h2 class="fancy"><span>Reset Password</span></h2>
+    </div><br>
+
+    <div class="row signup">
+
+        <% if (hasSuccess) { %>
+        <% for (var i = 0 ; i < success.length; i++) { %>
+        <div class="alert alert-success text-center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <%= success[i] %>
+        </div>
+        <% } %>
+        <% } %>
+
+        <form method="POST">
+
+            <div class="form-group input_group">
+                <input id="password" class="form-control" name="password" type="password" placeholder="PASSWORD" style="margin-bottom:20px;">
+            </div>
+
+            <div class="form-group input_group">
+                <input id="cpassword" class="form-control" name="cpassword" type="password" placeholder="CONFIRM PASSWORD" style="margin-bottom:20px;">
+            </div>
+
+            <% if (hasError) { %>
+            <% for (var i = 0 ; i < messages.length; i++) { %>
+            <div class="alert alert-danger text-center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <%= messages[i] %>
+            </div>
+            <% } %>
+            <% } %>
+
+
+            <div class="form-group">
+                <input type="submit" id="submit" value="Reset password" class="form-control btn btn-primary" style="">
+            </div>
+
+        </form>
+
+        <div class="text-center">
+            <h4>Already reset your password? <a href="/login">Login</a></h4>
+        </div>
+
+
+    </div>
+</div>
