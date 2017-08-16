@@ -56,27 +56,26 @@ input[type="submit"]{
     text-align: center;
 }
 
-#colDesc{
-    margin: 50px 20px 0px 70px;
-    padding-top: 40px;
+.colDesc{
+    margin: 50px 10px 0 20px;
+    padding-top: 20px;
     background-color: white;
     height: 350px;
     float: left;
-    width: 25%;
 }
 
-#colDesc h3{
-    font-size: 26px;
+.colDesc h3{
+    font-size: 20px;
     font-weight: normal;
     margin-bottom: 20px;
     text-transform: uppercase;
     color: #73879C;
 }
 
-#colDesc p{
-    font-size: 18px;
+.colDesc p{
+    font-size: 16px;
     font-weight: normal;
-    margin: 0px 30px 20px 30px;
+    margin: 0 30px 20px 30px;
     text-align: center;
     color: #73879C;
 }

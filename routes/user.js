@@ -51,7 +51,7 @@ module.exports = (app, passport) => {
     }));
 
     app.get('/home', (req, res) => {
-        res.render('home', {title: 'Home || Rate me'});
+        res.render('home', {title: 'Home || Rate me', user: req.user});
     });
 
     app.get('/forgot', (req, res) => {
