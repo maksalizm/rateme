@@ -7,7 +7,11 @@ var secret = require('../secret/secret');
 
 module.exports = (app, passport) => {
     app.get('/', (req, res) => {
-        res.render('index', {title: 'Rate me'});
+        if (req.session.cookie.originalMaxAge !== null) {
+            res.redirect('/home');
+        } else {
+            res.render('index', {title: 'Rate me'});
+        }
     });
 
     app.get('/signup', (req, res) => {
@@ -27,10 +31,16 @@ module.exports = (app, passport) => {
     });
 
     app.post('/login', validateLogin, passport.authenticate('local.login', {
-        successRedirect: '/home',
         failureRedirect: '/login',
         failureFlash: true
-    }));
+    }), (req, res) => {
+        if (req.body.rememberme) {
+            req.session.cookie.maxAge = 30 * 24 * 60 *  60 * 1000;
+        } else {
+            req.session.cookie.expires = null;
+        }
+        res.redirect('/home');
+    });
 
     app.get('/home', (req, res) => {
         res.render('home', {title: 'Home || Rate me'});
@@ -144,7 +154,7 @@ module.exports = (app, passport) => {
                                 req.flash('error', messages);
                                 res.redirect('/reset/' + req.params.token);
                             } else {
-                                user.password = req.body.password;
+                                user.password = user.encryptPassword(req.body.password);
                                 user.passwordResetToken = undefined;
                                 user.passwordResetExpire = undefined;
 
@@ -194,6 +204,14 @@ module.exports = (app, passport) => {
                 });
             }
         ])
+    });
+
+    app.get('/logout', (req, res) => {
+        req.logout();
+
+       req.session.destroy((err) => {
+           res.redirect('/');
+       })
     })
 };
 
