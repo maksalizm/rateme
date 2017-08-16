@@ -42,6 +42,14 @@ module.exports = (app, passport) => {
         res.redirect('/home');
     });
 
+    app.get('/auth/facebook', passport.authenticate('facebook'));
+
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+        successRedirect: '/home',
+        failureRedirect: '/login',
+        failureFlash: true
+    }));
+
     app.get('/home', (req, res) => {
         res.render('home', {title: 'Home || Rate me'});
     });

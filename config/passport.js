@@ -1,5 +1,7 @@
 var passport = require('passport');
-var LocalStraegy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var secret = require('../secret/secret');
 
 var User = require('../models/user');
 
@@ -13,7 +15,7 @@ passport.deserializeUser((id, done) => {
     })
 });
 
-passport.use('local.signup', new LocalStraegy({
+passport.use('local.signup', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
@@ -38,7 +40,7 @@ passport.use('local.signup', new LocalStraegy({
     })
 }));
 
-passport.use('local.login', new LocalStraegy({
+passport.use('local.login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
@@ -55,5 +57,27 @@ passport.use('local.login', new LocalStraegy({
         }
 
         return done(null, user);
+    })
+}));
+
+passport.use(new FacebookStrategy(secret.facebook, (req, token, refreshToken, profile, done) => {
+    User.findOne({facebook: profile.id}, (err, user) => {
+        if (err) {
+            done(err);
+        };
+
+        if (user) {
+            done(null, user);
+        } else {
+            var newUser = new User();
+            newUser.facebook = profile.id;
+            newUser.fullname = profile.displayName;
+            newUser.email = profile._json.email;
+            newUser.tokens.push({token: token});
+
+            newUser.save((err) => {
+                return done(null, newUser);
+            })
+        }
     })
 }));
