@@ -54,5 +54,16 @@ module.exports = (app) => {
         });
 
         form.parse(req);
-    })
+    });
+
+    app.get('/companies', (req, res) => {
+        Company.find({}, (err, result) => {
+            res.render('company/companies',
+                {
+                    title: 'All companies || RateMe',
+                    user: req.user,
+                    data: result
+                })
+        });
+    });
 };
