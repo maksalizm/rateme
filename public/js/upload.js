@@ -1,11 +1,11 @@
 $(document).ready(function() {
     $('#upload_btn').on('click', function() {
-        $('#upload_input').trigger('click');
+        $('#upload').trigger('click');
         $('.progress-bar').text('0%');
         $('.progress-bar').width('0%');
     })
-    $('#upload_input').on('change', function() {
-        var uploadInput = $('#upload_input');
+    $('#upload').on('change', function() {
+        var uploadInput = $('#upload');
 
         if (uploadInput.val() !== '') {
             var formData = new FormData();
@@ -17,7 +17,7 @@ $(document).ready(function() {
                 processData: false,
                 contentType: false,
                 success: function(data) {
-                    $('#upload_input').val('');
+                    $('#upload').val('');
                 },
                 xhr: function() {
                     var xhr = new XMLHttpRequest();

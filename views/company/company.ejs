@@ -22,6 +22,14 @@
                 </ul>
             </div>
             <div class="bodyDiv">
+                <% if (hasSuccess) { %>
+                <% for (var i = 0 ; i < success.length; i++) { %>
+                <div class="alert alert-success text-center">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <%= success[i] %>
+                </div>
+                <% } %>
+                <% } %>
                 <h4>Register Company</h4>
                 <form method="POST" action="/company/create">
 
@@ -81,7 +89,7 @@
                                                     <div class="progress-bar" role="progressbar"></div>
                                                 </div>
                                                 <button class="btn btn-lg upload-btn" id="upload_btn" type="button">Upload File</button>
-                                                <input type="file" class="form-control" name="upload" id="upload_input" style="display:none">
+                                                <input type="file" class="form-control" name="upload" id="upload" style="display:none">
                                             </div>
                                         </div>
                                     </div>
