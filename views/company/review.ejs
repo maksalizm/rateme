@@ -20,12 +20,8 @@
             <div class="bodyDiv">
                 <h4 style="">Write Review</h4>
 
-                <% if(hasMsg) {%>
-                <div class="alert alert-success"><%= msg %></div>
-                <% }%>
-
                 <form action="" method="post">
-                    <input class="form-control" id="id" value="<%= data._id %>" type="hidden">
+                    <input class="form-control" name="id" id="id" value="<%= data._id %>" type="hidden">
                     <div class="form-group ">
                         <label for="">Sending Company</label>
                         <input id="sender" class="form-control" name="sender" value="<%= user.company.name %>" type="text" style="margin-bottom:20px;">
@@ -39,13 +35,14 @@
                     <div class="form-group ">
                         <label for="">Rating</label>
                         <div class="col-sm-12" id="star_rating">
-                            <img id="1_star" src="/images/star_off.png" alt="1" title="Bad">
-                            <img id="2_star" src="/images/star_off.png" alt="2" title="Poor">
-                            <img id="3_star" src="/images/star_off.png" alt="3" title="Fair">
-                            <img id="4_star" src="/images/star_off.png" alt="4" title="Good">
-                            <img id="5_star" src="/images/star_off.png" alt="5" title="Excellent">
+                            <img id="1_star" class="star-img" src="/images/star_off.png" alt="1" data-id="0" title="Bad">
+                            <img id="2_star" class="star-img" src="/images/star_off.png" alt="2" data-id="1" title="Poor">
+                            <img id="3_star" class="star-img" src="/images/star_off.png" alt="3" data-id="2" title="Fair">
+                            <img id="4_star" class="star-img" src="/images/star_off.png" alt="4" data-id="3" title="Good">
+                            <img id="5_star" class="star-img" src="/images/star_off.png" alt="5" data-id="4" title="Excellent">
 
                             <span id="showTitle"></span>
+                            <input type="hidden" name="rating" id="rating">
                         </div>
 
                     </div>
@@ -53,6 +50,7 @@
                     <div class="form-group ">
                         <label for="">Review</label>
                         <textarea name="review" id="review" rows="8" cols="80" class="form-control"></textarea>
+                        <span></span>
                     </div>
 
                     <div class="form-group">
@@ -64,5 +62,3 @@
     </div>
 
 </div>
-
-
