@@ -158,4 +158,20 @@ module.exports = (app) => {
                 })
         }).sort({'ratingSum': -1});
     });
+
+    app.get('/company/search', (req, res) => {
+        res.render('company/search', {title: 'Find a company', user: req.user})
+    });
+
+    app.post('/company/search', (req, res) => {
+        var name = req.body.search;
+        var regex = new RegExp(name, 'i');
+
+        Company.find({'$or': [{'name': regex}]}, (err, data) => {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/company-profile/' + data[0]._id)
+        })
+    })
 };
