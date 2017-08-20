@@ -143,4 +143,9 @@ module.exports = (app) => {
             }
         ])
     });
+    app.get('/:name/employees', (req, res) => {
+        Company.findOne({name: req.params.name}, (err, data) => {
+            res.render('company/employee', {title: 'Company Employee', user: req.user, data: data})
+        })
+    })
 };
