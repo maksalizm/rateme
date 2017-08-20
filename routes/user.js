@@ -57,7 +57,7 @@ module.exports = (app, passport) => {
         failureFlash: true
     }));
 
-    app.get('/home', (req, res) => {
+    app.get('/home', isLoggedIn, (req, res) => {
         res.render('home', {title: 'Home || Rate me', user: req.user});
     });
 
@@ -270,5 +270,13 @@ function validateLogin(req, res, next) {
         res.redirect('/login');
     } else {
         return next();
+    }
+}
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.redirect('/');
     }
 }

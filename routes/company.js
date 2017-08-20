@@ -9,7 +9,7 @@ var User = require('../models/user');
 var {arrayAverage} = require('../myFunction');
 
 module.exports = (app) => {
-    app.get('/company/create', (req, res) => {
+    app.get('/company/create',isLoggedIn , (req, res) => {
         var success = req.flash('success');
         res.render('company/company', {
             title: 'Company Registration',
@@ -65,7 +65,7 @@ module.exports = (app) => {
         form.parse(req);
     });
 
-    app.get('/companies', (req, res) => {
+    app.get('/companies',isLoggedIn , (req, res) => {
         Company.find({}, (err, result) => {
             res.render('company/companies',
                 {
@@ -76,7 +76,7 @@ module.exports = (app) => {
         });
     });
 
-    app.get('/company-profile/:id', (req, res) => {
+    app.get('/company-profile/:id',isLoggedIn , (req, res) => {
         Company.findOne({'_id': req.params.id}, (err, result) => {
             var avg = arrayAverage(result.ratingNumber);
             console.log(avg);
@@ -90,7 +90,7 @@ module.exports = (app) => {
         })
     });
 
-    app.get('/company/register-employee/:id', (req, res) => {
+    app.get('/company/register-employee/:id',isLoggedIn, (req, res) => {
         Company.findOne({'_id': req.params.id}, (err, result) => {
             res.render('company/register-employee', {
                 title: 'Register Employee',
@@ -143,12 +143,12 @@ module.exports = (app) => {
             }
         ])
     });
-    app.get('/:name/employees', (req, res) => {
+    app.get('/:name/employees', isLoggedIn, (req, res) => {
         Company.findOne({name: req.params.name}, (err, data) => {
             res.render('company/employee', {title: 'Company Employee', user: req.user, data: data})
         })
     });
-    app.get('/companies/leaderboard', (req, res) => {
+    app.get('/companies/leaderboard',isLoggedIn , (req, res) => {
         Company.find({}, (err, result) => {
             res.render('company/leaderboard',
                 {
@@ -159,11 +159,11 @@ module.exports = (app) => {
         }).sort({'ratingSum': -1});
     });
 
-    app.get('/company/search', (req, res) => {
+    app.get('/company/search',isLoggedIn, (req, res) => {
         res.render('company/search', {title: 'Find a company', user: req.user})
     });
 
-    app.post('/company/search', (req, res) => {
+    app.post('/company/search',isLoggedIn, (req, res) => {
         var name = req.body.search;
         var regex = new RegExp(name, 'i');
 
@@ -175,3 +175,11 @@ module.exports = (app) => {
         })
     })
 };
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
