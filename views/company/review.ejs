@@ -21,6 +21,13 @@
                 <h4 style="">Write Review</h4>
 
                 <form action="" method="post">
+
+                    <% if (hasMsg) { %>
+                    <div class="alert alert-success text-center">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <%= msg %>
+                    </div>
+                    <% } %>
                     <input class="form-control" name="id" id="id" value="<%= data._id %>" type="hidden">
                     <div class="form-group ">
                         <label for="">Sending Company</label>
