@@ -147,5 +147,15 @@ module.exports = (app) => {
         Company.findOne({name: req.params.name}, (err, data) => {
             res.render('company/employee', {title: 'Company Employee', user: req.user, data: data})
         })
-    })
+    });
+    app.get('/companies/leaderboard', (req, res) => {
+        Company.find({}, (err, result) => {
+            res.render('company/leaderboard',
+                {
+                    title: 'Companies Leaderboard || RateMe',
+                    user: req.user,
+                    data: result
+                })
+        }).sort({'ratingSum': -1});
+    });
 };
