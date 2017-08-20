@@ -78,7 +78,7 @@
                                             <span class="star" data-score="<%= average %>"></span>
                                         </h1>
                                         <h2>Average Rating (<%= average %>)</h2>
-                                        <h3>Based on 5 reviews</h3>
+                                        <h3>Based on <%= data.ratingNumber.length %> reviews</h3>
                                     </div>
                                 </div><br><br>
 
@@ -95,7 +95,7 @@
                                 <% data.companyRating.forEach(function(val){ %>
                                 <div class="col-md-12 reviewDiv">
                                     <div class="col-md-2">
-                                        <img src="/images/<%= val.companyImage %>" width="100px" height="100px">
+                                        <img src="/uploads/<%= val.companyImage %>" width="100px" height="100px">
                                     </div>
 
                                     <div class="col-md-8">
